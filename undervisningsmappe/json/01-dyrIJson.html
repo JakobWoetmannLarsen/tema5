@@ -4,49 +4,70 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>01 Objekt</title>
-    <link rel="stylesheet" href="">
+    <title>Dyr med Json</title>
+    <style>
+        .dyr {
+            border: 1px solid black;
+        }
+
+        #liste {
+            display: grid;
+            grid-template-columns: repeat (1, 1fr);
+            text-align: center;
+            margin: 1rem;
+            grid-gap: 2rem;
+
+        }
+
+        @media only screen and (min-width:600px) {
+            #liste {
+                grid-template-columns: repeat (2, 1fr);
+                text-align: center;
+            }
+        }
+
+        @media only screen and (min-width:768px) {
+            #liste {
+                grid-template-columns: repeat (3, 1fr);
+                text-align: center;
+            }
+        }
+    </style>
 </head>
 
 <body>
     <div id="liste"></div>
+
+
     <script>
-        let first = 0;
-        let last = 1;
+        document.addEventListener("DOMContentLoaded", start);
+        console.log(start);
+
 
         let alleDyr = [];
 
 
-        document.addEventListener("DOMContentLoaded", start)
-        console.log(start)
-
-        function start() {
-
-            hentJson();
-
-            let dest = document.querySelector("liste");
-
-
-        }
-
-        async function hentJson() {
-
-            let jsonData = await fetch("dyr.json");
-            console.log(jsonData);
-            alleDyr = await jsonData.json();
-            console.log(alleDyr);
+        async function start() {
+            const myJson = await fetch("dyr.json");
+            alleDyr = await myJson.json();
             visDyr();
 
         }
 
 
         function visDyr() {
-            let dest = document.querySelector("liste");
-            alleDyr.forEach(dyr => {
-                div.innerHTML += `<h3>Dyr: ${dyr.navn}</h3> <img src="${dyr.billede}"><p>Type: ${dyr.type}</p> <p>Levested: ${dyr.levested}</p>`;
+            let dest = document.querySelector("#liste");
+
+            alleDyr.forEach((dyr) => {
+                dest.innerHTML += `
+<div class="dyr">
+<h3>Dyr: ${dyr.navn}</h3>
+<img src="${dyr.billede}">
+<p>Type: ${dyr.type}</p>
+<p>Levested: ${dyr.levested}</p>;
+</div>`;
             })
         }
-
     </script>
 </body>
 
