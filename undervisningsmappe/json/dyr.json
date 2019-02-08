@@ -1,20 +1,4 @@
-<!DOCTYPE html>
-<html lang="da">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>01 Objekt</title>
-    <link rel="stylesheet" href="">
-</head>
-
-<body>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", start)
-        console.log(start)
-        function start() {
-            let dyr = [{
+[{
                     "navn": "Gris",
                     "type": "Pattedyr",
                     "billede": "http://helf-kea.dk/test/gris.png",
@@ -23,7 +7,7 @@
                 {
                     "navn": "Frø",
                     "type": "Pattedyr",
-                    "billede": "http://helf-kea.dk/test/frø.png",
+                    "billede": "http://helf-kea.dk/test/frog.png",
                     "levested": "Søer"
                 },
                 {
@@ -45,10 +29,3 @@
                     "levested": "Amazonas"
                 },
             ]
-            console.log(dyr);
-            let info = `Dyr: ${dyr.navn}, Type:${dyr.type}, Levested:${dyr.levested}`
-        }
-    </script>
-</body>
-
-</html>

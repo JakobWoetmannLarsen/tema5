@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>01 Objekt</title>
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+    <div id="liste"></div>
+    <script>
+        let first = 0;
+        let last = 1;
+
+        let alleDyr = [];
+
+
+        document.addEventListener("DOMContentLoaded", start)
+        console.log(start)
+
+        function start() {
+
+            hentJson();
+
+            let dest = document.querySelector("liste");
+
+
+        }
+
+        async function hentJson() {
+
+            let jsonData = await fetch("dyr.json");
+            console.log(jsonData);
+            alleDyr = await jsonData.json();
+            console.log(alleDyr);
+            visDyr();
+
+        }
+
+
+        function visDyr() {
+            let dest = document.querySelector("liste");
+            alleDyr.forEach(dyr => {
+                div.innerHTML += `<h3>Dyr: ${dyr.navn}</h3> <img src="${dyr.billede}"><p>Type: ${dyr.type}</p> <p>Levested: ${dyr.levested}</p>`;
+            })
+        }
+
+    </script>
+</body>
+
+</html>
