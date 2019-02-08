@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .minedyr {
+            border: 1px solid black;
+            padding: 1rem;
+        }
+
+        #liste {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            text-align: center;
+            margin: 1rem;
+            grid-gap: 2rem;
+        }
+
+        @media only screen and (min-width:600px) {
+            #liste {
+                grid-template-columns: repeat(2, 1fr);
+                text-align: center;
+            }
+        }
+
+        @media only screen and (min-width:768px) {
+            #liste {
+                grid-template-columns: repeat(3, 1fr);
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="liste">
+
+    </div>
+
+
+    <script>
+        let alleDyr = [{
+                "navn": "frø",
+                "type": "amfibie",
+                "billede": "http://helf-kea.dk/test/frog.png",
+                "levested": "vandhullet"
+            },
+            {
+                "navn": "gris",
+                "type": "pattedyr",
+                "billede": "http://helf-kea.dk/test/gris.png",
+                "levested": "grisefarmen"
+            },
+            {
+                "navn": "ræv",
+                "type": "pattedyr",
+                "billede": "http://helf-kea.dk/test/fox.png",
+                "levested": "skoven"
+            },
+            {
+                "navn": "sild",
+                "type": "fisk",
+                "billede": "http://helf-kea.dk/test/sild.jpg",
+                "levested": "havet"
+            },
+            {
+                "navn": "krokodille",
+                "type": "reptil",
+                "billede": "http://helf-kea.dk/test/kroko.jpg",
+                "levested": "floden"
+            }
+        ];
+
+        document.addEventListener("DOMContentLoaded", start);
+
+
+        function start() {
+            let dest = document.querySelector("#liste");
+            alleDyr.forEach(dyr => {
+                dest.innerHTML += `<div class="minedyr"> <h3>${dyr.navn}</h3> <p>${dyr.type} fra ${dyr.levested} </p> <img src=${dyr.billede} alt=${dyr.navn}> </div>`;
+            })
+        }
+    </script>
+</body>
+
+</html>
