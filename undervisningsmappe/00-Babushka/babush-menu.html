@@ -51,20 +51,37 @@
         .valgt {
             background-color: red;
         }
+
+        .splash {
+            text-align: center;
+        }
+
+        .splash img {
+            width: 70%;
+            max-height: 25vw;
+            object-fit: cover;
+        }
     </style>
 </head>
 
 <body>
 
+    <div class="splash">
+        <img src="imgs/splash.png" alt="">
+    </div>
     <h1>Alle</h1>
 
     <div class="menu">
         <button class="filter valgt" data-kategori="alle">Alle</button>
         <button class="filter" data-kategori="hovedretter">Hovedretter</button>
         <button class="filter" data-kategori="forretter">Forretter</button>
-        <button class="filter" data-kategori="desserter">Deserter</button>
+        <button class="filter" data-kategori="desserter">Desserter</button>
         <button class="filter" data-kategori="drikkevarer">Drikkevarer</button>
         <button class="filter" data-kategori="sideorders">Tilbehør</button>
+    </div>
+
+    <div class="sort">
+        <button class="htl">Pris (Høj til lav</button>
     </div>
 
     <div id="liste"></div>
@@ -78,16 +95,11 @@
         console.log(start);
 
 
-
-
         function start() {
             let dest = document.querySelector("#liste");
             async function hentJson() {
                 const myJson = await fetch("https://mandalskeawebspace.dk/claude_php/clean_up_spreadsheet.php?id=1jxxxFoWBuMJ1qhQ9BQIAyKHmP38XtAF9_sQr0xo5JLo");
                 alleRetter = await myJson.json();
-                alleRetter.sort((a, b) => {
-                    return (b.pris - a.pris);
-                });
                 visRetter();
 
             }
@@ -99,7 +111,7 @@
                     if (filter == "alle" || filter == retter.kategori) {
                         dest.innerHTML += `
 <div class="ret">
-<h2>Navn: ${retter.navn}</h2>
+<h2>${retter.navn}</h2>
 <img src="imgs/small/${retter.billede}-sm.jpg">
 <br>
 <p>Pris: ${retter.pris} DKK</p>
@@ -126,6 +138,12 @@
                 });
                 this.classList.add("valgt");
             }
+        }
+
+        function sorterPris() {
+            alleRetter.sort((a, b) => {
+                return (b.pris - a.pris);
+            });
         }
     </script>
 </body>
