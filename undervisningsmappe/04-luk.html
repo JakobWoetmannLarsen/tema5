@@ -46,6 +46,11 @@
             #liste {
                 grid-template-columns: repeat(3, 1fr);
             }
+
+            body {
+                margin-left: 15vw;
+                margin-right: 15vw;
+            }
         }
 
         .menu {
@@ -122,7 +127,7 @@
         let filter = "alle";
 
         document.addEventListener("DOMContentLoaded", start);
-        console.log(hentJson);
+        console.log(start);
 
 
         function start() {
@@ -189,6 +194,11 @@
 </article>`;
 
             document.querySelector("#popup").style.display = "block";
+            document.querySelector("#popup #luk").addEventListener("click", close);
+        }
+
+        function close() {
+            document.querySelector("#popup").style.display = "none";
         }
     </script>
 </body>
