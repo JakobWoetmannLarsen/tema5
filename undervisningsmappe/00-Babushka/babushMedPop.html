@@ -4,8 +4,18 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Babushka</title>
+    <title>Babushka POP</title>
     <style>
+        *,
+        body * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
         img {
             max-height: 150px;
         }
@@ -61,6 +71,33 @@
             max-height: 25vw;
             object-fit: cover;
         }
+
+        #popup {
+            top: 0;
+            width: 100vw;
+            height: 100vh;
+            position: fixed;
+            background-color: rgba(0, 255, 255, 0.29);
+            display: none;
+        }
+
+        #indhold {
+            min-height: 50vh;
+            background-color: white;
+            width: 70vw;
+            margin: 4rem auto;
+        }
+
+        #luk {
+            position: fixed;
+            right: 2rem;
+
+        }
+
+        #luk button {
+            font-size: 2rem;
+            padding: 1rem 2rem;
+        }
     </style>
 </head>
 
@@ -86,6 +123,13 @@
 
     <div id="liste"></div>
 
+    <div id="popup">
+        <div id="luk">
+            <button>X</button>
+        </div>
+        <div id="indhold"></div>
+    </div>
+
 
     <script>
         let alleRetter = [];
@@ -108,8 +152,8 @@
             function visRetter() {
                 dest.innerHTML = "";
                 alleRetter.forEach(retter => {
-                    if (filter == "alle" || filter == retter.kategori) {
-                        dest.innerHTML += `
+                        if (filter == "alle" || filter == retter.kategori) {
+                            let template = `
 <div class="ret">
 <h2>${retter.navn}</h2>
 <img src="imgs/small/${retter.billede}-sm.jpg">
@@ -119,9 +163,14 @@
 <p>Kort: ${retter.kort}</p>
 <p>lang: ${retter.lang}</p>
 </div>`
-                    }
-                })
+                            dest.insertAdjacentHTML("beforeend", template);
+                            dest.lastElementChild.addEventListener("click", () =>
+                                visSingle(retter));
 
+                        };
+                    }
+
+                )
             }
             hentJson();
             document.querySelectorAll(".filter").forEach(but => {
@@ -150,6 +199,27 @@
                 return (b.pris - a.pris);
             });
             visRetter();
+        }
+
+        function visSingle(retter) {
+            document.querySelector("#indhold").innerHTML = `
+<div class="ret">
+<h2>${retter.navn}</h2>
+<img src="imgs/small/${retter.billede}-sm.jpg">
+<br>
+<p>Pris: ${retter.pris} DKK</p>
+<p>Kategori: ${retter.kategori}</p>
+<p>Kort: ${retter.kort}</p
+<p>lang: ${retter.lang}</p>
+</div>`;
+
+            document.querySelector("#popup").style.display = "block";
+            document.querySelector("#popup #luk").addEventListener("click", close);
+        }
+
+
+        function close() {
+            document.querySelector("#popup").style.display = "none";
         }
     </script>
 </body>
