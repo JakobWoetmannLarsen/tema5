@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personliste</title>
+    <style>
+        *,
+        body * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        img {
+            max-height: 150px;
+        }
+
+        .person {
+            background-color: antiquewhite;
+            border: 1px solid black;
+            max-width: 1200px;
+
+        }
+
+
+        @media only screen and (min-width:868px) {
+
+            body {
+                margin-left: 15vw;
+                margin-right: 15vw;
+            }
+        }
+
+
+        #single {
+            background-color: rgba(0, 255, 255, 0.29);
+        }
+
+        #indhold {
+            min-height: 50vh;
+            background-color: white;
+            width: 70vw;
+            margin: 4rem auto;
+        }
+
+        #tilbage {}
+
+        #tilbage button {
+            font-size: 2rem;
+            padding: 1rem 2rem;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <main id="single">
+        <div id="tilbage">
+            <button>↶</button>
+        </div>
+        <section id="indhold"></section>
+    </main>
+
+
+
+
+    <script>
+        let urlParams = new URLSearchParams(window.location.search);
+        let github = urlParams.get("github");
+        console.log(github);
+
+        document.querySelector("#tilbage button").addEventListener("click", () => {
+            location.href = "05-kald.html"
+        })
+        let allePersoner = [];
+
+        document.addEventListener("DOMContentLoaded", start);
+
+
+        function start() {
+
+            async function hentJson() {
+                const myJson = await fetch("https://mandalskeawebspace.dk/claude_php/clean_up_spreadsheet.php?id=1OLlD_GRoz71piHvnW306omRAyHS7vtLOILQt-K0YF_c");
+                allePersoner = await myJson.json();
+                allePersoner.sort((a, b) => {
+                    return (b.alder - a.alder);
+                });
+                visPersoner();
+            }
+
+
+            function visPersoner() {
+                let dest = document.querySelector("#indhold");
+                dest.innerHTML = "";
+                allePersoner.forEach(personer => {
+                    if (github == personer.github) {
+                        let template = `
+<article class="person">
+<h2>${personer.navn}</h2>
+<img src="${personer.billede}">
+<br>
+<a href="https://github.com/${personer.github}"> GitHub </a>
+<p>Alder: ${personer.alder}</p>
+<p>Køn: ${personer.køn}</p>
+<p>Hold: ${personer.hold}</p>
+</article>`;
+                        dest.insertAdjacentHTML("beforeend", template);
+                    }
+                })
+            }
+
+            hentJson();
+        }
+
+        function visSingle(personer) {
+            document.querySelector("#indhold").innerHTML = `
+<article class="person">
+<h2>${personer.navn}</h2>
+<img src="${personer.billede}">
+<br>
+<p>Alder: ${personer.alder}</p>
+<h3>${personer.navn}'s historie </h3>
+<p>${personer.historie}</p>
+<p>Mail: ${personer.email}</p>
+</article>`;
+
+            document.querySelector("#single").style.display = "block";
+        }
+    </script>
+</body>
+
+</html>
