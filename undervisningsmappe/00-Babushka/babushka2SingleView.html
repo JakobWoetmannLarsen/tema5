@@ -30,7 +30,7 @@
 
         .ret img {
 
-            max-width: 1000px;
+            max-width: 400px;
             border-radius: 130px;
             box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
             transition: transform .5s;
@@ -211,6 +211,7 @@
     <script>
         let alleRetter = [];
         let filter = "alle";
+
         document.addEventListener("DOMContentLoaded", start);
         console.log(start);
 
@@ -229,7 +230,7 @@
                 dest.innerHTML = "";
                 alleRetter.forEach(retter => {
                     if (filter == "alle" || filter == retter.kategori) {
-                        dest.innerHTML += `
+                        let template = `
 <div class="ret">
 
 <img src="imgs/small/${retter.billede}-sm.jpg">
@@ -240,6 +241,10 @@
 
 
 </div>`
+                        dest.insertAdjacentHTML("beforeend", template);
+                        dest.lastElementChild.addEventListener("click", () => {
+                            location.href = "bab_veiw.html?navn=" + retter.navn;
+                        });
                     }
                 })
             }

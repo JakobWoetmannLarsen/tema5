@@ -71,6 +71,7 @@
             max-height: 25vw;
             object-fit: cover;
         }
+
     </style>
 </head>
 
@@ -110,6 +111,9 @@
             async function hentJson() {
                 const myJson = await fetch("https://mandalskeawebspace.dk/claude_php/clean_up_spreadsheet.php?id=1jxxxFoWBuMJ1qhQ9BQIAyKHmP38XtAF9_sQr0xo5JLo");
                 alleRetter = await myJson.json();
+                alleRetter.sort((a, b) => {
+                    return (b.pris - a.pris);
+                });
                 visRetter();
 
             }
@@ -161,6 +165,7 @@
             });
             visRetter();
         }
+
     </script>
 </body>
 

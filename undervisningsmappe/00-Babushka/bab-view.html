@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personliste</title>
+    <style>
+        *,
+        body * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        img {
+            max-height: 150px;
+        }
+
+        .ret {
+            background-color: antiquewhite;
+            border: 1px solid black;
+            max-width: 1200px;
+
+        }
+
+
+        @media only screen and (min-width:868px) {
+
+            body {
+                margin-left: 15vw;
+                margin-right: 15vw;
+            }
+        }
+
+
+        #single {
+            background-color: rgba(0, 255, 255, 0.29);
+        }
+
+        #indhold {
+            min-height: 50vh;
+            background-color: white;
+            width: 70vw;
+            margin: 4rem auto;
+        }
+
+        #tilbage {}
+
+        #tilbage button {
+            font-size: 2rem;
+            padding: 1rem 2rem;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <main id="single">
+        <div id="tilbage">
+            <button>↶</button>
+        </div>
+        <section id="indhold"></section>
+    </main>
+
+
+
+
+    <script>
+        let urlParams = new URLSearchParams(window.location.search);
+        let navn = urlParams.get("navn");
+        console.log(navn);
+
+        document.querySelector("#tilbage button").addEventListener("click", () => {
+            location.href = "babushka2SingleView.html"
+        })
+        let alleRetter = [];
+
+        document.addEventListener("DOMContentLoaded", start);
+
+
+        function start() {
+
+            async function hentJson() {
+                const myJson = await fetch("https://mandalskeawebspace.dk/claude_php/clean_up_spreadsheet.php?id=1jxxxFoWBuMJ1qhQ9BQIAyKHmP38XtAF9_sQr0xo5JLo");
+                alleRetter = await myJson.json();
+                alleRetter.sort((a, b) => {
+                    return (b.alder - a.alder);
+                });
+                visRetter();
+            }
+
+
+            function visRetter() {
+                let dest = document.querySelector("#indhold");
+                dest.innerHTML = "";
+                allePersoner.forEach(retter => {
+                    if (navn == retter.navn) {
+                        let template = `
+<article class="ret">
+<img src="imgs/small/${retter.billede}-sm.jpg">
+<h1> ${retter.navn}</h1>
+<p> ${retter.kort}</p>
+<h2> ${retter.pris},-</h2>
+</article>`;
+                        dest.insertAdjacentHTML("beforeend", template);
+                    }
+                })
+            }
+
+            hentJson();
+        }
+
+        function visSingle(retter) {
+            document.querySelector("#indhold").innerHTML = `
+<article class="ret">
+<img src="imgs/small/${retter.billede}-sm.jpg">
+<h1> ${retter.navn}</h1>
+<p> ${retter.kort}</p>
+<h2> ${retter.pris},-</h2>
+</article>`;
+
+            document.querySelector("#single").style.display = "block";
+        }
+    </script>
+</body>
+
+</html>
