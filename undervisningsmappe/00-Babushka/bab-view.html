@@ -9,6 +9,7 @@
         *,
         body * {
             box-sizing: border-box;
+
         }
 
         body {
@@ -16,16 +17,35 @@
             padding: 0;
         }
 
+        h1 {
+            font-size: 2rem;
+            font-family: sans-serif;
+        }
+
+        h2 {
+            font-size: 3rem;
+            font-family: monospace
+        }
+
+        p {
+            font-size: 1.2rem;
+            font-family: monospace;
+        }
+
         img {
-            max-height: 150px;
+            max-height: 450px;
+            border-radius: 15%;
         }
 
         .ret {
             background-color: antiquewhite;
-            border: 1px solid black;
             max-width: 1200px;
+            border-radius: 15%;
+            text-align: center;
+            padding: 5vw;
 
         }
+
 
 
         @media only screen and (min-width:868px) {
@@ -37,9 +57,7 @@
         }
 
 
-        #single {
-            background-color: rgba(0, 255, 255, 0.29);
-        }
+
 
         #indhold {
             min-height: 50vh;
@@ -53,6 +71,7 @@
         #tilbage button {
             font-size: 2rem;
             padding: 1rem 2rem;
+            border-radius: 15%;
         }
     </style>
 </head>
@@ -104,7 +123,7 @@
 <article class="ret">
 <img src="imgs/small/${retter.billede}-sm.jpg">
 <h1> ${retter.navn}</h1>
-<p> ${retter.kort}</p>
+<p> ${retter.lang}</p>
 <h2> ${retter.pris},-</h2>
 </article>`;
                         dest.insertAdjacentHTML("beforeend", template);
