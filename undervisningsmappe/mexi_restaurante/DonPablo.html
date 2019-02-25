@@ -4,11 +4,15 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Babushka</title>
-    <link href="https://fonts.googleapis.com/css?family=Staatliches|Lato:400,700|Montserrat:400,500,700|Roboto:400,500" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Pablo Eco bar</title>
+    <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700|Chango|Permanent+Marker" rel="stylesheet">
 
     <style>
+        /*  font-family: 'Amatic SC', cursive;
+font-family: 'Chango', cursive;
+font-family: 'Permanent Marker', cursive;
+        */
+
         *,
         body * {
             box-sizing: border-box;
@@ -17,6 +21,12 @@
         body {
             margin: 0;
             padding: 0;
+            background-color: #0A1B2D;
+
+        }
+
+        grid-line {
+            color: white;
         }
 
         img {
@@ -45,11 +55,6 @@
         }
 
 
-        .ret p {
-            font-family: 'Staatliches', cursive;
-            font-size: 1.6em;
-            color: #333B3E;
-        }
 
         #liste {
             display: grid;
@@ -77,14 +82,22 @@
         }
 
         h2 {
-            font-family: 'Staatliches', cursive;
+            font-family: 'Amatic_SC', bold;
             font-size: 2.3em;
+            color: #A48853;
         }
 
         h1 {
-            font-family: 'Staatliches', cursive;
-            color: #333B3E;
+            font-family: 'Chango', cursive;
+            color: #A48853;
             font-size: 2.5em;
+        }
+
+        p {
+            font-family: Amatic SC, bold;
+            color: #A48853;
+            font-size: 1.5em;
+
         }
 
         .filter valgt {
@@ -94,7 +107,7 @@
 
 
         .filter {
-            background-color: #B68FA2;
+            background-color: #2F2E16;
             border-radius: 25px;
             border: none;
             color: white;
@@ -114,64 +127,13 @@
         #splash {
             text-align: center;
             margin-bottom: 20px;
-
         }
 
-        .fa {
-            padding: 20px;
-            font-size: 30px;
-            width: 30px;
-            text-align: center;
-            text-decoration: none;
-            margin: 5px 12px;
-            border-radius: 50%;
-            float: left;
-            position: absolute;
-
-
+        #splash img {
+            object-fit: cover;
+            width: 100vw;
         }
 
-        .fa:hover {
-            opacity: 0.7;
-        }
-
-        .fa-facebook {
-            background: white;
-            color: #4D4F4F;
-            border: solid #4D4F4F;
-        }
-
-        .fa-youtube {
-            background: #4D4F4F;
-            color: white;
-            left: 7%;
-
-
-        }
-
-        .fa-instagram {
-            background: #4D4F4F;
-            color: white;
-            left: 14%;
-
-        }
-
-        .bestil {
-            background-color: #B68FA2;
-            border-radius: 25px;
-            border: none;
-            color: white;
-            padding: 16px 32px;
-            text-align: center;
-            font-size: 16px;
-            margin: 15px 2px;
-            display: inline-block;
-            text-decoration: none;
-            cursor: pointer;
-            float: right;
-            position: absolute;
-            right: 3%
-        }
 
         .bestil:hover {
             box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
@@ -208,15 +170,8 @@
 
 <body>
 
-    <!--    <h1>Alle Retter</h1>-->
-    <a href="#" class="fa fa-facebook"></a>
-    <a href="#" class="fa fa-youtube"></a>
-    <a href="#" class="fa fa-instagram"></a>
-
-    <div> <button class="bestil">Bestil Online</button></div>
-
     <div id="splash">
-        <img src="imgs/lady.png" alt="splash">
+        <img src="moodboard/farver_m%C3%B8nster.jpg" alt="splash">
     </div>
 
 
